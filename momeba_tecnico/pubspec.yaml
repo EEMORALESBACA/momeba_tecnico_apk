@@ -1,0 +1,43 @@
+name: momeba_tecnico
+description: "Grupo Momeba · app de técnicos de campo."
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.12.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  pdf: 3.11.1
+  printing: 5.13.4
+  intl: 0.19.0
+  path_provider: ^2.1.4
+  share_plus: ^10.0.2
+  url_launcher: ^6.3.1
+  momeba_core:
+    path: ../packages/momeba_core
+  firebase_core: 3.6.0
+  firebase_auth: 5.3.1
+  cloud_firestore: 5.4.3
+  flutter_riverpod: ^2.6.1
+  image_picker: ^1.1.2
+  gal: ^2.3.1
+  geolocator: ^13.0.1
+  signature: ^5.5.0
+  flutter_local_notifications: ^19.0.0
+  workmanager: ^0.10.9
+  shared_preferences: ^2.3.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/momeba_simbolo.png
+    - assets/images/momeba_icono.png
