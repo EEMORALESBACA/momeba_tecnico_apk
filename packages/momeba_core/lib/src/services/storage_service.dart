@@ -75,9 +75,11 @@ class StorageService {
           try {
             final req = await cliente.postUrl(uri);
             req.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
-            req.headers.set(HttpHeaders.acceptHeader, 'application/json, text/plain, */*');
-            req.headers.contentType = ContentType('application', 'octet-stream');
-            req.add(bytes.sublist(ini, fin));
+            MomebaConfig.encabezadosNavegador(req.headers);
+            req.headers.set(HttpHeaders.contentTypeHeader, 'application/octet-stream');
+            final trozo = bytes.sublist(ini, fin);
+            req.contentLength = trozo.length; // sin "chunked" (HostGator responde 406)
+            req.add(trozo);
             final res = await req.close().timeout(const Duration(minutes: 3));
             final cuerpo = await res.transform(utf8.decoder).join();
             try {

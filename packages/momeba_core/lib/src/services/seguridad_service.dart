@@ -46,17 +46,22 @@ class SeguridadService {
       ..userAgent = MomebaConfig.userAgent;
     try {
       final req = await cliente.postUrl(Uri.parse(MomebaConfig.seguridadPhp));
-      req.headers.contentType = ContentType.json;
-      req.headers.set(HttpHeaders.acceptHeader, 'application/json, text/plain, */*');
-      req.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
-      req.write(jsonEncode({'idToken': token, 'accion': accion, ...?extra}));
+      // Igual que el panel web: cuerpo con tamaño fijo (sin "chunked", que
+      // ModSecurity de HostGator rechaza con 406) y encabezados de navegador.
+      final cuerpoReq = utf8.encode(jsonEncode({'idToken': token, 'accion': accion, ...?extra}));
+      MomebaConfig.encabezadosNavegador(req.headers);
+      req.headers.set(HttpHeaders.contentTypeHeader, 'application/json');
+      req.contentLength = cuerpoReq.length;
+      req.add(cuerpoReq);
       final res = await req.close().timeout(const Duration(seconds: 25));
       final cuerpo = await res.transform(utf8.decoder).join();
       Map<String, dynamic> j;
       try {
         j = jsonDecode(cuerpo) as Map<String, dynamic>;
       } catch (_) {
-        throw ErrorSeguridad('El verificador de seguridad respondió algo inesperado (${res.statusCode}).');
+        final pista = cuerpo.replaceAll(RegExp(r'<[^>]*>'), ' ').replaceAll(RegExp(r'\s+'), ' ').trim();
+        throw ErrorSeguridad('El verificador de seguridad respondió algo inesperado (${res.statusCode}).'
+            '${pista.isEmpty ? '' : ' ${pista.length > 140 ? pista.substring(0, 140) : pista}'}');
       }
       if (j['ok'] != true) {
         throw ErrorSeguridad((j['error'] as String?) ?? 'Error de seguridad.', caducada: j['caducada'] == true);
