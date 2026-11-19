@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "772375139357",
+    "project_id": "momeba-servicio",
+    "storage_bucket": "momeba-servicio.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:772375139357:android:b87609f9b46301fcde22f4",
+        "android_client_info": {
+          "package_name": "com.grupomomeba.tecnico"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnhkh1Q6bEbFCzcD8Ig1fc3V9rmX4g6b8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
