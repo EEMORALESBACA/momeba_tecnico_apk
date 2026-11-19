@@ -51,7 +51,9 @@ class StorageService {
     if (user == null) throw ErrorSubida('No hay sesión iniciada.');
     final id = _idSubida();
     final total = bytes.isEmpty ? 1 : (bytes.length / _parte).ceil();
-    final cliente = HttpClient()..connectionTimeout = const Duration(seconds: 20);
+    final cliente = HttpClient()
+      ..connectionTimeout = const Duration(seconds: 20)
+      ..userAgent = MomebaConfig.userAgent;
     try {
       String? url;
       for (var i = 0; i < total; i++) {
@@ -73,6 +75,7 @@ class StorageService {
           try {
             final req = await cliente.postUrl(uri);
             req.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
+            req.headers.set(HttpHeaders.acceptHeader, 'application/json, text/plain, */*');
             req.headers.contentType = ContentType('application', 'octet-stream');
             req.add(bytes.sublist(ini, fin));
             final res = await req.close().timeout(const Duration(minutes: 3));

@@ -6,6 +6,9 @@ class MomebaConfig {
   static const servidor = 'https://grupomomeba.com/servicio';
 
   static const api = '$servidor/api.php';
+  /// HostGator (ModSecurity) responde 406 a las peticiones con el agente
+  /// "Dart/x (dart:io)" o sin Accept; por eso la app se presenta como navegador.
+  static const userAgent = 'Mozilla/5.0 (Linux; Android) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Mobile GrupoMomebaTecnico/1.0';
   static const seguridadPhp = '$api?m=seguridad';
   static const archivosPhp = '$api?m=archivos';
 

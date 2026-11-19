@@ -41,10 +41,14 @@ class SeguridadService {
     final user = _auth.currentUser;
     if (user == null) throw ErrorSeguridad('No hay sesión iniciada.');
     final token = await user.getIdToken();
-    final cliente = HttpClient()..connectionTimeout = const Duration(seconds: 15);
+    final cliente = HttpClient()
+      ..connectionTimeout = const Duration(seconds: 15)
+      ..userAgent = MomebaConfig.userAgent;
     try {
       final req = await cliente.postUrl(Uri.parse(MomebaConfig.seguridadPhp));
       req.headers.contentType = ContentType.json;
+      req.headers.set(HttpHeaders.acceptHeader, 'application/json, text/plain, */*');
+      req.headers.set(HttpHeaders.authorizationHeader, 'Bearer $token');
       req.write(jsonEncode({'idToken': token, 'accion': accion, ...?extra}));
       final res = await req.close().timeout(const Duration(seconds: 25));
       final cuerpo = await res.transform(utf8.decoder).join();
