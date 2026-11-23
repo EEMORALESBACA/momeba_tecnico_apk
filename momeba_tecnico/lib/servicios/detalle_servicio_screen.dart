@@ -271,8 +271,6 @@ class _DetalleServicioScreenState extends ConsumerState<DetalleServicioScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _indigo,
-        foregroundColor: Colors.white,
         title: const Text('Detalle de servicio'),
       ),
       body: StreamBuilder<ServicioAsignado?>(

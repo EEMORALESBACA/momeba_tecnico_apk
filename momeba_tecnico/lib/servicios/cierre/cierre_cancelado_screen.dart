@@ -110,7 +110,7 @@ class _CierreCanceladoScreenState extends ConsumerState<CierreCanceladoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: _rojo, foregroundColor: Colors.white, title: const Text('Cancelado / Rechazado')),
+      appBar: AppBar(title: const Text('Cancelado / Rechazado')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -122,7 +122,6 @@ class _CierreCanceladoScreenState extends ConsumerState<CierreCanceladoScreen> {
               decoration: const InputDecoration(
                 labelText: 'Motivo de cancelación / rechazo *',
                 hintText: 'Ej. Cliente ausente en el domicilio',
-                border: OutlineInputBorder(),
               ),
             ),
             const SizedBox(height: 16),

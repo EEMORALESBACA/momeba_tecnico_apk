@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:momeba_core/momeba_core.dart';
 
 import '../providers/providers.dart';
+import '../tema.dart';
 import 'detalle_servicio_screen.dart';
 
 const _indigo = Color(0xFF2A2F6B);
@@ -65,8 +66,6 @@ class _ProductividadScreenState extends ConsumerState<ProductividadScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _indigo,
-        foregroundColor: Colors.white,
         title: const Text('Mi productividad'),
       ),
       body: historial.when(
@@ -203,11 +202,7 @@ class _ProductividadScreenState extends ConsumerState<ProductividadScreen> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(14),
-            border: Border(top: BorderSide(color: color, width: 4)),
-            boxShadow: const [
-              BoxShadow(
-                  color: Color(0x14000000), blurRadius: 8, offset: Offset(0, 2))
-            ],
+            border: Border.all(color: Momeba.linea),
           ),
           child: Column(children: [
             Text(valor,

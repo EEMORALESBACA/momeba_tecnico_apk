@@ -135,6 +135,9 @@ class ServicioAsignado {
   /// El domicilio ya se comprobó: un técnico llegó ahí con GPS.
   final bool ubicacionValidada;
 
+  /// Servicio de práctica (demo para técnicos) creado desde el panel.
+  final bool demo;
+
   /// Horario para mostrar: el bloque ("10:00 a 12:00") o la hora exacta.
   String? get horarioTexto => ventana != null && ventana!.contains('-') ? ventana!.replaceFirst('-', ' a ') : hora;
 
@@ -183,6 +186,7 @@ class ServicioAsignado {
     this.fotoLugarUrl,
     this.ventana,
     this.ubicacionValidada = false,
+    this.demo = false,
   });
 
   /// Fecha de captura del panel: "2026-11-06" (+ "10:00") o ISO completo.
@@ -247,6 +251,7 @@ class ServicioAsignado {
       fotoLugarUrl: map['fotoLugarUrl'] as String?,
       ventana: map['ventana'] as String?,
       ubicacionValidada: map['ubicacionValidada'] == true,
+      demo: map['demo'] == true,
     );
   }
 
@@ -305,6 +310,7 @@ class ServicioAsignado {
       fotoLugarUrl: fotoLugarUrl,
       ventana: ventana,
       ubicacionValidada: ubicacionValidada,
+      demo: demo,
     );
   }
 }

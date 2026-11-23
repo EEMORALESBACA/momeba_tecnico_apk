@@ -37,7 +37,7 @@ class CapacitacionScreen extends ConsumerWidget {
     final vistas = tecnico?.capacitacion ?? const <String>[];
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: Momeba.indigo, foregroundColor: Colors.white, title: const Text('Capacitación')),
+      appBar: AppBar(title: const Text('Capacitación')),
       body: descargas.when(
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (e, _) => Center(child: Text('No se pudo cargar la capacitación: $e')),

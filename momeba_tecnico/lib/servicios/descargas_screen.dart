@@ -45,7 +45,7 @@ class _DescargasScreenState extends ConsumerState<DescargasScreen> {
   Widget build(BuildContext context) {
     final descargas = ref.watch(descargasProvider);
     return Scaffold(
-      appBar: AppBar(backgroundColor: Momeba.indigo, foregroundColor: Colors.white, title: const Text('Descargas'), actions: [
+      appBar: AppBar(title: const Text('Descargas'), actions: [
         IconButton(
           icon: const Icon(Icons.school_outlined),
           tooltip: 'Capacitación',
@@ -73,7 +73,6 @@ class _DescargasScreenState extends ConsumerState<DescargasScreen> {
             decoration: const InputDecoration(
               prefixIcon: Icon(Icons.search),
               hintText: 'Buscar marca, modelo o archivo',
-              border: OutlineInputBorder(),
               isDense: true,
             ),
             onChanged: (v) => setState(() => _busca = v.trim().toLowerCase()),

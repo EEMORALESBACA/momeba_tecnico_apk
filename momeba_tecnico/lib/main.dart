@@ -32,10 +32,7 @@ class MomebaApp extends StatelessWidget {
     return MaterialApp(
       title: 'Momeba Técnico',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Momeba.indigo, primary: Momeba.indigo, secondary: Momeba.turquesa),
-        useMaterial3: true,
-      ),
+      theme: temaMomeba(),
       home: const _RaizApp(),
     );
   }

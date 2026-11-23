@@ -164,8 +164,6 @@ class _FormularioServicioScreenState extends State<FormularioServicioScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _indigo,
-        foregroundColor: Colors.white,
         title: Text('Servicio ${widget.servicio.folio}'),
       ),
       body: SingleChildScrollView(
@@ -208,7 +206,6 @@ class _FormularioServicioScreenState extends State<FormularioServicioScreen> {
           decoration: const InputDecoration(
             labelText: 'Monto a cobrar (MXN) *',
             prefixText: '\$ ',
-            border: OutlineInputBorder(),
           ),
           onChanged: (_) => setState(() {}),
         ),
@@ -300,14 +297,14 @@ class _FormularioServicioScreenState extends State<FormularioServicioScreen> {
               Expanded(
                 child: TextField(
                   controller: _antiguedadCtrl,
-                  decoration: const InputDecoration(labelText: 'Antigüedad aprox.', border: OutlineInputBorder(), isDense: true),
+                  decoration: const InputDecoration(labelText: 'Antigüedad aprox.', isDense: true),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
                   controller: _capacidadCtrl,
-                  decoration: const InputDecoration(labelText: 'Capacidad (Ej. 18 pies, 15kg)', border: OutlineInputBorder(), isDense: true),
+                  decoration: const InputDecoration(labelText: 'Capacidad (Ej. 18 pies, 15kg)', isDense: true),
                 ),
               ),
             ]),
@@ -316,14 +313,14 @@ class _FormularioServicioScreenState extends State<FormularioServicioScreen> {
               Expanded(
                 child: TextField(
                   controller: _colorCtrl,
-                  decoration: const InputDecoration(labelText: 'Color', border: OutlineInputBorder(), isDense: true),
+                  decoration: const InputDecoration(labelText: 'Color', isDense: true),
                 ),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: TextField(
                   controller: _accesoriosCtrl,
-                  decoration: const InputDecoration(labelText: 'Accesorios (control, manguera...)', border: OutlineInputBorder(), isDense: true),
+                  decoration: const InputDecoration(labelText: 'Accesorios (control, manguera...)', isDense: true),
                 ),
               ),
             ]),
@@ -358,7 +355,6 @@ class _FormularioServicioScreenState extends State<FormularioServicioScreen> {
               maxLines: 4,
               decoration: const InputDecoration(
                 labelText: 'Descripción de la falla y condiciones del equipo *',
-                border: OutlineInputBorder(),
               ),
               onChanged: (_) => setState(() {}),
             ),
@@ -422,7 +418,7 @@ class _FormularioServicioScreenState extends State<FormularioServicioScreen> {
         Expanded(
           child: TextField(
             controller: ctrl,
-            decoration: InputDecoration(labelText: etiqueta, border: const OutlineInputBorder(), isDense: true),
+            decoration: InputDecoration(labelText: etiqueta, isDense: true),
             onChanged: (_) => setState(() {}),
           ),
         ),

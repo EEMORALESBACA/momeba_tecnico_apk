@@ -101,7 +101,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       controller: _correoCtrl,
                       keyboardType: TextInputType.emailAddress,
                       autofillHints: const [AutofillHints.email],
-                      decoration: const InputDecoration(labelText: 'Correo', border: OutlineInputBorder()),
+                      decoration: const InputDecoration(labelText: 'Correo'),
                       validator: (v) => (v == null || !v.contains('@')) ? 'Correo inválido' : null,
                     ),
                     const SizedBox(height: 12),
@@ -111,7 +111,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       autofillHints: const [AutofillHints.password],
                       decoration: InputDecoration(
                         labelText: 'Contraseña',
-                        border: const OutlineInputBorder(),
                         suffixIcon: IconButton(
                           tooltip: _ver ? 'Ocultar contraseña' : 'Mostrar contraseña',
                           icon: Icon(_ver ? Icons.visibility_off : Icons.visibility),

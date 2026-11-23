@@ -370,8 +370,6 @@ class _RutaOptimaScreenState extends ConsumerState<RutaOptimaScreen> {
   }
 
   PreferredSizeWidget _barra(List<_Parada> paradas) => AppBar(
-        backgroundColor: _indigo,
-        foregroundColor: Colors.white,
         title: const Text('Ruta del día'),
         actions: [
           IconButton(

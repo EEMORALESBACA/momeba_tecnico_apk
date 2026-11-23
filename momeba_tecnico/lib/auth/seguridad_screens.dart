@@ -79,7 +79,6 @@ class _CampoCodigo extends StatelessWidget {
       decoration: InputDecoration(
         counterText: '',
         hintText: respaldo ? 'XXXXX-XXXXX' : '000000',
-        border: const OutlineInputBorder(),
       ),
       onChanged: (v) {
         if (!respaldo && v.length == 6) onCompleto(v);

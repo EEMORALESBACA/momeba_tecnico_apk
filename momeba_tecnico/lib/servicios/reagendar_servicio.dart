@@ -38,8 +38,7 @@ Future<void> reagendarServicio(
         content: TextField(
           controller: ctrl,
           decoration: const InputDecoration(
-              hintText: 'Ej. el cliente lo pidió para el fin de semana',
-              border: OutlineInputBorder()),
+              hintText: 'Ej. el cliente lo pidió para el fin de semana'),
           maxLines: 2,
         ),
         actions: [

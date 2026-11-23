@@ -127,7 +127,7 @@ class _CierrePendienteScreenState extends ConsumerState<CierrePendienteScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: _amarillo, foregroundColor: Colors.black, title: const Text('Pendiente')),
+      appBar: AppBar(title: const Text('Pendiente')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -172,7 +172,6 @@ class _CierrePendienteScreenState extends ConsumerState<CierrePendienteScreen> {
                 controller: _otraRefaccionCtrl,
                 decoration: const InputDecoration(
                   labelText: 'Otra refacción (escríbela si no está en la lista)',
-                  border: OutlineInputBorder(),
                 ),
               ),
             ],

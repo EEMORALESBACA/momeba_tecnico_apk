@@ -97,8 +97,6 @@ class _CierreExitosoScreenState extends State<CierreExitosoScreen> {
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: _primario,
-          foregroundColor: Colors.white,
           title: Text('Servicio ${widget.servicio.folio} completado ✅',
               style: const TextStyle(fontSize: 17)),
         ),
@@ -121,7 +119,7 @@ class _CierreExitosoScreenState extends State<CierreExitosoScreen> {
                 padding: const EdgeInsets.fromLTRB(16, 12, 16, 10),
                 decoration: BoxDecoration(
                   color: Theme.of(context).colorScheme.surface,
-                  boxShadow: const [BoxShadow(blurRadius: 8, color: Color(0x22000000))],
+                  border: const Border(top: BorderSide(color: Color(0xFFE6E8EF))),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

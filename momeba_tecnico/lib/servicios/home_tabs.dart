@@ -30,32 +30,18 @@ class _HomeTabsState extends State<HomeTabs> {
           PerfilScreen(),
         ],
       ),
-      bottomNavigationBar: NavigationBar(
+      bottomNavigationBar: DecoratedBox(
+        decoration: const BoxDecoration(border: Border(top: BorderSide(color: Momeba.linea))),
+        child: NavigationBar(
         selectedIndex: _tab,
-        indicatorColor: Momeba.turquesa.withValues(alpha: 0.18),
         onDestinationSelected: (i) => setState(() => _tab = i),
         destinations: const [
-          NavigationDestination(
-            icon: Icon(Icons.build_circle_outlined),
-            selectedIcon: Icon(Icons.build_circle, color: Momeba.indigo),
-            label: 'Servicios',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.insights_outlined),
-            selectedIcon: Icon(Icons.insights, color: Momeba.indigo),
-            label: 'Productividad',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.download_outlined),
-            selectedIcon: Icon(Icons.download, color: Momeba.indigo),
-            label: 'Descargas',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person, color: Momeba.indigo),
-            label: 'Perfil',
-          ),
+          NavigationDestination(icon: Icon(Icons.assignment_outlined), selectedIcon: Icon(Icons.assignment), label: 'Servicios'),
+          NavigationDestination(icon: Icon(Icons.bar_chart_outlined), selectedIcon: Icon(Icons.bar_chart), label: 'Productividad'),
+          NavigationDestination(icon: Icon(Icons.menu_book_outlined), selectedIcon: Icon(Icons.menu_book), label: 'Soporte'),
+          NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Perfil'),
         ],
+      ),
       ),
     );
   }

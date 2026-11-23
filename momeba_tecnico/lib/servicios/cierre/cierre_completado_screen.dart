@@ -171,7 +171,7 @@ class _CierreCompletadoScreenState extends ConsumerState<CierreCompletadoScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: _verde, foregroundColor: Colors.white, title: const Text('Completado')),
+      appBar: AppBar(title: const Text('Completado')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -182,12 +182,12 @@ class _CierreCompletadoScreenState extends ConsumerState<CierreCompletadoScreen>
             const SizedBox(height: 8),
             TextField(
               controller: _modeloCtrl,
-              decoration: const InputDecoration(labelText: 'Modelo', border: OutlineInputBorder()),
+              decoration: const InputDecoration(labelText: 'Modelo'),
             ),
             const SizedBox(height: 10),
             TextField(
               controller: _serieCtrl,
-              decoration: const InputDecoration(labelText: 'Número de serie', border: OutlineInputBorder()),
+              decoration: const InputDecoration(labelText: 'Número de serie'),
             ),
             const SizedBox(height: 18),
             const Text('Refacciones utilizadas en la reparación',
@@ -209,7 +209,7 @@ class _CierreCompletadoScreenState extends ConsumerState<CierreCompletadoScreen>
             TextField(
               controller: _otraRefaccionCtrl,
               decoration: const InputDecoration(
-                  labelText: 'Otra refacción (si no está en la lista)', border: OutlineInputBorder()),
+                  labelText: 'Otra refacción (si no está en la lista)'),
             ),
             const SizedBox(height: 18),
             if (widget.servicio.tipoServicio == 'cargo')

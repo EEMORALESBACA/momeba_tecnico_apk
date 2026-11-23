@@ -78,8 +78,6 @@ class _PerfilScreenState extends ConsumerState<PerfilScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: _indigo,
-        foregroundColor: Colors.white,
         title: const Text('Mi perfil'),
       ),
       body: tecnicoAsync.when(
@@ -218,10 +216,7 @@ class _TarjetaCreditoAlmacen extends StatelessWidget {
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(14),
-                border: Border.all(color: const Color(0xFFE3E5F0)),
-                boxShadow: const [
-                  BoxShadow(color: Color(0x14000000), blurRadius: 8, offset: Offset(0, 2)),
-                ],
+                border: Border.all(color: const Color(0xFFE6E8EF)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
