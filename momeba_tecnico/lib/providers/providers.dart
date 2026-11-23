@@ -45,9 +45,11 @@ class EstadoGate {
 /// entrar y de nuevo tras 2 horas sin actividad. La sesión la valida el
 /// servidor (api.php?m=seguridad) y la exigen las reglas de Firestore.
 class SeguridadNotifier extends StateNotifier<EstadoGate> {
+  // Los técnicos entran solo con correo y contraseña (sin Google Authenticator):
+  // las reglas de Firestore no les piden la sesión de 2 horas.
   SeguridadNotifier(this._svc, {required bool conUsuario})
-      : super(const EstadoGate(FaseSeguridad.revisando)) {
-    if (conUsuario) revisar();
+      : super(EstadoGate(conUsuario && !usarCodigo ? FaseSeguridad.lista : FaseSeguridad.revisando)) {
+    if (conUsuario && usarCodigo) revisar();
   }
 
   final SeguridadService _svc;
@@ -61,7 +63,11 @@ class SeguridadNotifier extends StateNotifier<EstadoGate> {
 
   bool get lista => state.fase == FaseSeguridad.lista;
 
+  /// false: los técnicos entran solo con contraseña. El flujo con código queda listo por si se reactiva.
+  static const usarCodigo = false;
+
   Future<void> revisar() async {
+    if (!usarCodigo) { _entrar(); return; }
     state = const EstadoGate(FaseSeguridad.revisando);
     try {
       final e = await _svc.estado();
@@ -112,7 +118,7 @@ class SeguridadNotifier extends StateNotifier<EstadoGate> {
   /// Cada toque en pantalla cuenta como actividad y, cada 10 min, renueva la
   /// sesión del servidor por 2 horas más.
   void actividad() {
-    if (!lista) return;
+    if (!usarCodigo || !lista) return;
     if (revisarInactividad()) return;
     _ultimaActividad = DateTime.now();
     if (!_renovando && DateTime.now().difference(_ultimaRenovacion) > _renovarCada) {
@@ -126,7 +132,7 @@ class SeguridadNotifier extends StateNotifier<EstadoGate> {
 
   /// Si pasaron 2 horas sin actividad, pide de nuevo el código.
   bool revisarInactividad() {
-    if (lista && DateTime.now().difference(_ultimaActividad) > MomebaConfig.inactividad) {
+    if (usarCodigo && lista && DateTime.now().difference(_ultimaActividad) > MomebaConfig.inactividad) {
       _svc.cerrar();
       state = const EstadoGate(FaseSeguridad.codigo, mensaje: avisoInactividad);
       return true;
@@ -136,7 +142,7 @@ class SeguridadNotifier extends StateNotifier<EstadoGate> {
 
   /// Al volver a la app: confirma con el servidor que la sesión siga viva.
   Future<void> alVolver() async {
-    if (!lista || revisarInactividad()) return;
+    if (!usarCodigo || !lista || revisarInactividad()) return;
     try {
       final e = await _svc.estado();
       if (!e.sesion) sesionCaducada();
@@ -144,7 +150,11 @@ class SeguridadNotifier extends StateNotifier<EstadoGate> {
   }
 
   void sesionCaducada() {
-    if (mounted && lista) state = const EstadoGate(FaseSeguridad.codigo, mensaje: avisoInactividad);
+    if (!mounted || !lista) return;
+    state = usarCodigo
+        ? const EstadoGate(FaseSeguridad.codigo, mensaje: avisoInactividad)
+        : const EstadoGate(FaseSeguridad.error,
+            mensaje: 'El servidor no te dio permiso. Revisa que tu usuario esté activo como técnico y que las reglas de Firestore estén actualizadas.');
   }
 }
 
@@ -184,7 +194,7 @@ final descargasProvider = StreamProvider<List<Descarga>>((ref) {
 
 /// Cierra todo: sesión del servidor, ubicación y Firebase.
 Future<void> cerrarSesionCompleta(WidgetRef ref) async {
-  await ref.read(seguridadServiceProvider).cerrar();
+  if (SeguridadNotifier.usarCodigo) await ref.read(seguridadServiceProvider).cerrar();
   await UbicacionGlobal.detener();
   await RastreoRespaldo.cancelar();
   await ref.read(authServiceProvider).cerrarSesion();

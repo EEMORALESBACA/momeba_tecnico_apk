@@ -75,7 +75,7 @@ class ListaServiciosScreen extends ConsumerWidget {
                 )
               else
                 for (final s in lista) ...[
-                  _TarjetaServicio(s: s),
+                  TarjetaServicio(s: s),
                   const SizedBox(height: 10),
                 ],
             ],
@@ -86,8 +86,8 @@ class ListaServiciosScreen extends ConsumerWidget {
   }
 }
 
-class _TarjetaServicio extends StatelessWidget {
-  const _TarjetaServicio({required this.s});
+class TarjetaServicio extends StatelessWidget {
+  const TarjetaServicio({required this.s});
   final ServicioAsignado s;
 
   @override
